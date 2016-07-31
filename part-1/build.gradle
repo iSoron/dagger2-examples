@@ -9,8 +9,8 @@ jar {
 }
 
 dependencies {
-    compile 'com.google.dagger:dagger:2.0.2'
-    compile 'com.google.dagger:dagger-compiler:2.0.2'
+    compile 'com.google.dagger:dagger:2.6'
+    compile 'com.google.dagger:dagger-compiler:2.6'
 }
 
 repositories {
