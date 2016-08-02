@@ -1,5 +1,4 @@
 package com.example;
-
 import javax.inject.*;
 import com.acme.*;
 

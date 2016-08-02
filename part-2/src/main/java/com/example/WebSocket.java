@@ -1,5 +1,5 @@
 package com.example;
-import javax.inject.Inject;
+import javax.inject.*;
 
 public class WebSocket {
     @Inject

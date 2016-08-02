@@ -1,41 +1,7 @@
 package com.example;
-
 import javax.inject.*;
 import dagger.*;
 import com.acme.*;
-
-@Module
-class YahooWeatherModule {
-
-    private final String key;
-
-    public YahooWeatherModule(String key) {
-        this.key = key;
-    }
-
-    @Provides
-    WeatherService provideWeatherService(WebSocket socket) {
-        return new YahooWeather(key, socket);
-    }
-}
-
-@Module
-class WeatherChannelModule {
-    @Provides
-    WeatherService provideWeatherService() {
-        return new WeatherChannel();
-    }
-}
-
-@Module
-class GpsSensorModule {
-    @Provides
-    GpsSensor provideGpsSensor() {
-        GpsSensor gps = new GpsSensor();
-        gps.calibrate();
-        return gps;
-    }
-}
 
 @Component(modules = {YahooWeatherModule.class, GpsSensorModule.class})
 interface AppComponent {
@@ -44,8 +10,14 @@ interface AppComponent {
 
 public class Application {
     public static void main(String args[]) {
+        if(args.length < 1) {
+            System.out.println("You must provide an API key\n");
+            return;
+        }
+
         String apiKey = args[0];
         YahooWeatherModule yahoo = new YahooWeatherModule(apiKey);
+
         AppComponent component = DaggerAppComponent.builder()
                .yahooWeatherModule(yahoo)
                .build();
